@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Peter",
+    "title": "Developer"
+  },{
+    "id": 1,
+    "name": "Georg",
+    "title": "Developer"
+  },{
+    "id": 2,
+    "name": "Gertrud",
+    "title": "Developer"
+  },{
+    "id": 3,
+    "name": "Jasmine",
+    "title": "Boss"
+  },{
+    "id": 4,
+    "name": "Sigrid",
+    "title": "Secretary"
+  }
+]
