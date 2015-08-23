@@ -1,4 +1,4 @@
-Simple example of testing react app with jasmine and Karma
+Simple example of testing react app with jasmine and Karma, as alternative to Jest
 
 ## How to use
 
