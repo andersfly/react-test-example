@@ -1,4 +1,4 @@
-Simple example of testing react app with jasmine and Karma 
+Simple example of testing react app with jasmine and Karma
 
 ## How to use
 
@@ -12,4 +12,15 @@ Global npm modules are needed, install them with
 
 ```bash
 $ npm install karma-cli webpack-dev-server
+```
+
+Run project with
+
+```bash
+$ webpack-dev-server
+```
+Run tests with
+
+```bash
+$ karma start
 ```
