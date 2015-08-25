@@ -66,3 +66,18 @@ export const ContactStore = Reflux.createStore({
     this._store.filteredList = filteredList;
   }
 });
+
+export const CategoryStore = Reflux.createStore({
+  init() {
+    this.listenTo(ContactStore, this.onContactChange);
+    this._store = {
+      list: []
+    };
+  },
+
+  onContactChange(contacts) {
+    let categories = _.sortBy(_.uniq(contacts.list.map(contact => contact.category)));
+    this._store.list = categories;
+    this.trigger(this._store);
+  }
+});
