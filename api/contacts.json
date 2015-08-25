@@ -2,22 +2,22 @@
   {
     "id": 0,
     "name": "Peter",
-    "title": "Developer"
+    "category": "Developer"
   },{
     "id": 1,
     "name": "Georg",
-    "title": "Developer"
+    "category": "Developer"
   },{
     "id": 2,
     "name": "Gertrud",
-    "title": "Developer"
+    "category": "Developer"
   },{
     "id": 3,
     "name": "Jasmine",
-    "title": "Boss"
+    "category": "Boss"
   },{
     "id": 4,
     "name": "Sigrid",
-    "title": "Secretary"
+    "category": "Secretary"
   }
 ]

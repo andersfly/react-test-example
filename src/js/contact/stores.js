@@ -7,23 +7,62 @@ import {ContactActions} from './actions';
 export const ContactStore = Reflux.createStore({
   listenables: [ContactActions],
   init() {
-    this.list = [];
+    this.query = '';
+    this._store = {
+      list: [],         // Raw list of all currently loaded contacts
+      filteredList: [], // Filtered list currently loaded contacts
+      current: null     // Contact currently being edited or added
+    };
   },
+
   onQueryList(query) {
-    if (query.length < 3) {
-      this.filteredList = this.list;
+    this.query = query;
+    this.createFilteredList();
+    this.trigger(this._store);
+  },
+
+  onUpdateItem(id, attrs) {
+    let item = _.find(this._store.list, {id: id});
+    _.assign(item, attrs);
+    this._store.current = null;
+    this.trigger(this._store);
+  },
+
+  onUpdateCurrent(attrs) {
+    let item = this._store.current;
+    _.assign(item, attrs);
+    this.trigger(this._store);
+  },
+
+  onEditItem(id) {
+    let item = _.clone(_.find(this._store.list, {id: id}));
+    this._store.current = item;
+    this.trigger(this._store);
+  },
+
+  onLoad() {
+    axios.get('/api/contacts.json').then(resp => {
+      this._store.list = resp.data;
+      this.createFilteredList();
+      this.trigger(this._store);
+    });
+  },
+
+  /**
+   * Create filtered list from raw list and query
+   */
+  createFilteredList() {
+    let list = this._store.list,
+        filteredList;
+
+    if (this.query.length < 3) {
+      filteredList = list;
     } else {
-      let matches = kindalike(query, this.list.map(item => item.name));
-      this.filteredList = this.list.filter(item => {
+      let matches = kindalike(this.query, list.map(item => item.name));
+      filteredList = list.filter(item => {
         return _.find(matches, {subject: item.name});
       });
     }
-    this.trigger(this.filteredList);
-  },
-  onLoad() {
-    axios.get('/api/contacts.json').then(resp => {
-      this.list = resp.data;
-      this.trigger(this.list);
-    });
+    this._store.filteredList = filteredList;
   }
 });
